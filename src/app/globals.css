@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0f1419;
+  --bg-surface: #1a1f2e;
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --color-emerald: #1a3a2a;
+  --color-gold: #c5a55a;
+  --color-ivory: #f5f0e8;
+  --color-ivory-muted: #b8b0a0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--color-ivory);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.quran-text {
+  font-family: var(--font-amiri), 'Traditional Arabic', serif;
+  font-size: 1.75rem;
+  line-height: 2.5;
+  letter-spacing: 0.02em;
+  text-align: right;
+  direction: rtl;
+}
+
+.quran-text-lg {
+  font-size: 2rem;
+  line-height: 2.8;
+}
+
+.quran-text-sm {
+  font-size: 1.5rem;
+  line-height: 2.2;
+}
+
+.verse-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-emerald);
+  border: 2px solid var(--color-gold);
+  border-radius: 50%;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-gold);
+  margin: 0 0.5rem;
+}
+
+.tajweed-ham-wasl { color: #9333ea; }
+.tajweed-madda-normal { color: #dc2626; }
+.tajweed-madda-permissible { color: #16a34a; }
+.tajweed-madda-necessary { color: #ea580c; }
+.tajweed-laam-shamsiyah { color: #eab308; }
+.tajweed-qalqalah { color: #2563eb; }
+.tajweed-ghunnah { color: #f97316; }
+.tajweed-ikhfa { color: #06b6d4; }
+.tajweed-idghaam { color: #8b5cf6; }
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
