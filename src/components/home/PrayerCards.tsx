@@ -1,32 +1,79 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+import { getPrayerTimes, formatTime, type PrayerTime } from '@/lib/prayer/prayer-times';
 import Link from 'next/link';
 
-const prayers = [
-  { id: 'fajr', name: 'الفجر', time: ' sunrise', rakahs: 2, color: 'from-blue-900/30 to-indigo-900/20' },
-  { id: 'dhuhr', name: 'الظهر', time: 'midday', rakahs: 4, color: 'from-amber-900/30 to-orange-900/20' },
-  { id: 'asr', name: 'العصر', time: 'afternoon', rakahs: 4, color: 'from-orange-900/30 to-red-900/20' },
-  { id: 'maghrib', name: 'المغرب', time: 'sunset', rakahs: 3, color: 'from-red-900/30 to-purple-900/20' },
-  { id: 'isha', name: 'العشاء', time: 'night', rakahs: 4, color: 'from-purple-900/30 to-slate-900/20' },
-];
-
 export function PrayerCards() {
+  const [data, setData] = useState<{
+    times: PrayerTime[];
+    nextPrayerName: string;
+    timeToNext: string;
+  } | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    getPrayerTimes().then((result) => {
+      if (!cancelled && result) {
+        setData({
+          times: result.times.filter((p) => p.rakahs > 0),
+          nextPrayerName: result.nextPrayerName,
+          timeToNext: result.timeToNext,
+        });
+      }
+      if (!cancelled) setLoading(false);
+    });
+    return () => { cancelled = true; };
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-5 gap-2 md:gap-3">
+        {Array.from({ length: 5 }, (_, i) => (
+          <div key={i} className="glass rounded-xl p-3 md:p-4 text-center animate-pulse">
+            <div className="h-4 bg-white/10 rounded w-10 mx-auto mb-1" />
+            <div className="h-3 bg-white/5 rounded w-8 mx-auto" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (!data) return null;
+
+  const activePrayers = data.times.filter((p) => p.rakahs > 0);
+
   return (
-    <div className="grid grid-cols-5 gap-2 md:gap-3">
-      {prayers.map((prayer) => (
-        <Link
-          key={prayer.id}
-          href={`/quick?prayer=${prayer.id}`}
-          className={`glass rounded-xl p-3 md:p-4 text-center hover:bg-white/8 active:scale-95 transition-all duration-200 bg-gradient-to-b ${prayer.color}`}
-        >
-          <div className="font-amiri text-base md:text-lg font-bold text-quran-ivory mb-1">
-            {prayer.name}
-          </div>
-          <div className="text-[10px] md:text-xs text-quran-ivory-muted">
-            {prayer.rakahs} ركعات
-          </div>
-        </Link>
-      ))}
+    <div>
+      <div className="grid grid-cols-5 gap-2 md:gap-3">
+        {activePrayers.map((prayer) => {
+          const isNext = prayer.nameArabic === data.nextPrayerName;
+          return (
+            <Link
+              key={prayer.name}
+              href={`/quick?prayer=${prayer.name.toLowerCase()}`}
+              className={`rounded-xl p-3 md:p-4 text-center transition-all duration-200 ${
+                isNext
+                  ? 'bg-quran-gold/15 border border-quran-gold/30 text-quran-gold'
+                  : 'glass hover:bg-white/8 active:scale-95'
+              }`}
+            >
+              <div className={`font-amiri text-base md:text-lg font-bold mb-1 ${isNext ? 'text-quran-gold' : 'text-quran-ivory'}`}>
+                {prayer.nameArabic}
+              </div>
+              <div className={`text-[10px] md:text-xs ${isNext ? 'text-quran-gold/80' : 'text-quran-ivory-muted'}`}>
+                {formatTime(prayer.time)}
+              </div>
+              {isNext && (
+                <div className="text-[9px] text-quran-gold/70 mt-1">
+                  {data.timeToNext}
+                </div>
+              )}
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

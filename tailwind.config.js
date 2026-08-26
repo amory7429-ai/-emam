@@ -9,17 +9,17 @@ module.exports = {
     extend: {
       colors: {
         quran: {
-          bg: '#0f1419',
-          surface: '#1a1f2e',
+          bg: '#0B0F0D',
+          surface: 'rgba(255,255,255,0.045)',
           glass: 'rgba(255,255,255,0.05)',
-          'glass-border': 'rgba(255,255,255,0.08)',
-          emerald: '#1a3a2a',
-          'emerald-light': '#2d5a42',
-          gold: '#c5a55a',
-          'gold-muted': '#a08940',
-          ivory: '#f5f0e8',
-          'ivory-muted': '#b8b0a0',
-          olive: '#6b7280',
+          'glass-border': 'rgba(255,255,255,0.09)',
+          emerald: '#17352A',
+          'emerald-light': '#1E4A39',
+          gold: '#C6A15B',
+          'gold-muted': '#A88B4A',
+          ivory: '#F4EFE5',
+          'ivory-muted': '#9AA39D',
+          olive: '#6B7280',
         },
       },
       fontFamily: {

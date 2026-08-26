@@ -3,14 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #0f1419;
-  --bg-surface: #1a1f2e;
+  --bg-primary: #0B0F0D;
+  --bg-surface: rgba(255, 255, 255, 0.045);
   --bg-glass: rgba(255, 255, 255, 0.05);
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --color-emerald: #1a3a2a;
-  --color-gold: #c5a55a;
-  --color-ivory: #f5f0e8;
-  --color-ivory-muted: #b8b0a0;
+  --border-glass: rgba(255, 255, 255, 0.09);
+  --color-emerald: #17352A;
+  --color-gold: #C6A15B;
+  --color-ivory: #F4EFE5;
+  --color-ivory-muted: #9AA39D;
+  --font-amiri: 'Amiri', serif;
+  --font-qalam: 'Noto Naskh Arabic', sans-serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
 }
 
 * {
@@ -27,7 +31,7 @@ html {
 body {
   background: var(--bg-primary);
   color: var(--color-ivory);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -79,6 +83,14 @@ body {
   font-size: 0.875rem;
   color: var(--color-gold);
   margin: 0 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.verse-number:hover {
+  transform: scale(1.1);
+  border-color: var(--color-ivory);
+  color: var(--color-ivory);
 }
 
 .tajweed-ham-wasl { color: #9333ea; }
@@ -100,6 +112,81 @@ body {
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer utilities {
+  .bg-abyss { background-color: #0B0F0D; }
+  .bg-emerald-dark { background-color: #17352A; }
+  .text-gold { color: #C6A15B; }
+  .text-ivory { color: #F4EFE5; }
+  .text-ivory-muted { color: #9AA39D; }
+  .border-gold { border-color: #C6A15B; }
+  .border-emerald { border-color: #17352A; }
+  .bg-gold { background-color: #C6A15B; }
+  .bg-emerald { background-color: #17352A; }
+  .text-emerald-400 { color: #34d399; }
+  .bg-emerald-400 { background-color: #34d399; }
+}
+
+::selection {
+  background: rgba(198, 161, 91, 0.3);
+  color: var(--color-ivory);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+input:focus:not(:focus-visible), textarea:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

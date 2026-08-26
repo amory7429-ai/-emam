@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C6A15B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A8893D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#17352A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0B0F0D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="192" height="192" rx="40" fill="#0B0F0D"/>
+  
+  <!-- Outer decorative ring -->
+  <circle cx="96" cy="96" r="85" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Inner circle with emerald gradient -->
+  <circle cx="96" cy="96" r="75" fill="url(#emeraldGrad)"/>
+  
+  <!-- Open book shape - left page -->
+  <path d="M 96 45 Q 55 50 45 95 Q 55 90 96 85 Z" fill="url(#goldGrad)" opacity="0.9"/>
+  
+  <!-- Open book shape - right page -->
+  <path d="M 96 45 Q 137 50 147 95 Q 137 90 96 85 Z" fill="url(#goldGrad)" opacity="0.9"/>
+  
+  <!-- Book spine -->
+  <line x1="96" y1="45" x2="96" y2="85" stroke="#0B0F0D" stroke-width="3"/>
+  
+  <!-- Decorative dots on book -->
+  <circle cx="70" cy="65" r="2" fill="#0B0F0D" opacity="0.6"/>
+  <circle cx="75" cy="70" r="1.5" fill="#0B0F0D" opacity="0.6"/>
+  <circle cx="122" cy="65" r="2" fill="#0B0F0D" opacity="0.6"/>
+  <circle cx="117" cy="70" r="1.5" fill="#0B0F0D" opacity="0.6"/>
+  
+  <!-- Crescent moon - top -->
+  <path d="M 96 28 Q 105 35 105 45 Q 96 40 87 45 Q 87 35 96 28 Z" fill="url(#goldGrad)"/>
+  
+  <!-- Star -->
+  <polygon points="96,20 98,26 104,26 99,30 101,36 96,32 91,36 93,30 88,26 94,26" fill="url(#goldGrad)" opacity="0.8"/>
+  
+  <!-- Bottom decorative element -->
+  <path d="M 70 140 Q 96 155 122 140" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.5"/>
+  
+  <!-- Geometric pattern - left -->
+  <path d="M 40 96 L 50 96 L 45 86 Z" fill="url(#goldGrad)" opacity="0.3"/>
+  
+  <!-- Geometric pattern - right -->
+  <path d="M 152 96 L 142 96 L 147 86 Z" fill="url(#goldGrad)" opacity="0.3"/>
+  
+  <!-- Subtle inner glow -->
+  <circle cx="96" cy="96" r="60" fill="none" stroke="url(#goldGrad)" stroke-width="1" opacity="0.2"/>
+</svg>
