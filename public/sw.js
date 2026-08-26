@@ -66,6 +66,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   if (request.method !== 'GET') return;
+  if (request.url.startsWith('chrome-extension://') || !request.url.startsWith('http')) return;
 
   const url = new URL(request.url);
 
@@ -102,6 +103,10 @@ self.addEventListener('fetch', (event) => {
 async function cacheFirstWithNetwork(request, cacheName) {
   const cached = await caches.match(request);
   if (cached) return cached;
+
+  if (request.url.startsWith('chrome-extension://') || !request.url.startsWith('http')) {
+    return fetch(request);
+  }
 
   try {
     const response = await fetch(request);
