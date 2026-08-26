@@ -79,18 +79,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     async function init() {
       try {
+        const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+        if (!apiKey || apiKey === 'your_api_key_here') {
+          console.error("FIREBASE_INIT: Missing or placeholder NEXT_PUBLIC_FIREBASE_API_KEY");
+          if (!cancelled) {
+            setState((prev) => ({
+              ...prev,
+              loading: false,
+              initialized: true,
+              firebaseReady: false,
+              error: 'Firebase غير مُعدّ. تواصل مع الإدارة.',
+            }));
+          }
+          return;
+        }
+        console.log("FIREBASE_INIT: API key found, initializing...");
         await initializeFirebaseClient();
+        console.log("FIREBASE_INIT: Firebase ready successfully");
         if (!cancelled) {
           setState((prev) => ({ ...prev, firebaseReady: true }));
         }
-      } catch {
+      } catch (error) {
+        console.error("FIREBASE_INIT_ERROR:", error);
         if (!cancelled) {
-          // Firebase not configured — run without auth
           setState((prev) => ({
             ...prev,
             loading: false,
             initialized: true,
             firebaseReady: false,
+            error: 'فشل في تهيئة Firebase. تحقق من الاتصال بالإنترنت.',
           }));
         }
       }
@@ -147,8 +164,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       await setDoc(userRef, newProfile);
       return newProfile;
-    } catch {
-      // Firestore may not be available — return basic profile
+    } catch (error: any) {
+      console.error("FIRESTORE_PROFILE_ERROR:", {
+        code: error?.code,
+        message: error?.message,
+        uid: user.uid,
+      });
       return {
         uid: user.uid,
         displayName: user.displayName || null,
@@ -217,13 +238,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signInWithGoogle = useCallback(async (): Promise<UserCredential> => {
     setState((prev) => ({ ...prev, error: null }));
     try {
+      if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+        console.error("AUTH_ENV_CHECK: NEXT_PUBLIC_FIREBASE_API_KEY is missing");
+        throw new Error('Firebase not configured');
+      }
       const auth = firebase.auth;
-      if (!auth) throw new Error('Firebase not configured');
+      if (!auth) {
+        console.error("AUTH_ERROR: Firebase Auth instance is null");
+        throw new Error('Firebase not configured');
+      }
       const provider = new GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
-      return await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+      console.log("AUTH_GOOGLE_SUCCESS:", result.user.email);
+      return result;
     } catch (error: any) {
+      console.error("LOGIN_ERROR_DETAILS:", {
+        code: error?.code,
+        message: error?.message,
+        customData: error?.customData,
+      });
       const message = getErrorMessage(error);
       setState((prev) => ({ ...prev, error: message }));
       throw error;
@@ -234,10 +269,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signInWithEmail = useCallback(async (email: string, password: string): Promise<UserCredential> => {
     setState((prev) => ({ ...prev, error: null }));
     try {
+      if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+        console.error("AUTH_ENV_CHECK: NEXT_PUBLIC_FIREBASE_API_KEY is missing");
+        throw new Error('Firebase not configured');
+      }
       const auth = firebase.auth;
-      if (!auth) throw new Error('Firebase not configured');
-      return await signInWithEmailAndPassword(auth, email, password);
+      if (!auth) {
+        console.error("AUTH_ERROR: Firebase Auth instance is null");
+        throw new Error('Firebase not configured');
+      }
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      console.log("AUTH_EMAIL_SUCCESS:", result.user.email);
+      return result;
     } catch (error: any) {
+      console.error("LOGIN_ERROR_DETAILS:", {
+        code: error?.code,
+        message: error?.message,
+        customData: error?.customData,
+        email,
+      });
       const message = getErrorMessage(error);
       setState((prev) => ({ ...prev, error: message }));
       throw error;
@@ -248,10 +298,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signUpWithEmail = useCallback(async (email: string, password: string): Promise<UserCredential> => {
     setState((prev) => ({ ...prev, error: null }));
     try {
+      if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+        console.error("AUTH_ENV_CHECK: NEXT_PUBLIC_FIREBASE_API_KEY is missing");
+        throw new Error('Firebase not configured');
+      }
       const auth = firebase.auth;
-      if (!auth) throw new Error('Firebase not configured');
-      return await createUserWithEmailAndPassword(auth, email, password);
+      if (!auth) {
+        console.error("AUTH_ERROR: Firebase Auth instance is null");
+        throw new Error('Firebase not configured');
+      }
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("AUTH_SIGNUP_SUCCESS:", result.user.email);
+      return result;
     } catch (error: any) {
+      console.error("LOGIN_ERROR_DETAILS:", {
+        code: error?.code,
+        message: error?.message,
+        customData: error?.customData,
+        email,
+      });
       const message = getErrorMessage(error);
       setState((prev) => ({ ...prev, error: message }));
       throw error;
@@ -262,10 +327,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signInAsGuest = useCallback(async (): Promise<UserCredential> => {
     setState((prev) => ({ ...prev, error: null }));
     try {
+      if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+        console.error("AUTH_ENV_CHECK: NEXT_PUBLIC_FIREBASE_API_KEY is missing");
+        throw new Error('Firebase not configured');
+      }
       const auth = firebase.auth;
-      if (!auth) throw new Error('Firebase not configured');
-      return await signInAnonymously(auth);
+      if (!auth) {
+        console.error("AUTH_ERROR: Firebase Auth instance is null");
+        throw new Error('Firebase not configured');
+      }
+      const result = await signInAnonymously(auth);
+      console.log("AUTH_GUEST_SUCCESS:", result.user.uid);
+      return result;
     } catch (error: any) {
+      console.error("LOGIN_ERROR_DETAILS:", {
+        code: error?.code,
+        message: error?.message,
+      });
       const message = getErrorMessage(error);
       setState((prev) => ({ ...prev, error: message }));
       throw error;
@@ -277,6 +355,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const auth = firebase.auth;
       if (auth) await firebaseSignOut(auth);
+      console.log("AUTH_SIGNOUT_SUCCESS");
       setState({
         user: null,
         profile: null,
@@ -285,7 +364,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         error: null,
         firebaseReady: true,
       });
-    } catch {
+    } catch (error: any) {
+      console.error("SIGNOUT_ERROR:", error);
       setState((prev) => ({
         ...prev,
         error: 'حدث خطأ أثناء تسجيل الخروج.',
@@ -296,10 +376,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Password reset
   const resetPassword = useCallback(async (email: string): Promise<void> => {
     try {
+      if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
+        console.error("AUTH_ENV_CHECK: NEXT_PUBLIC_FIREBASE_API_KEY is missing");
+        throw new Error('Firebase not configured');
+      }
       const auth = firebase.auth;
-      if (!auth) throw new Error('Firebase not configured');
+      if (!auth) {
+        console.error("AUTH_ERROR: Firebase Auth instance is null");
+        throw new Error('Firebase not configured');
+      }
       await sendPasswordResetEmail(auth, email);
+      console.log("AUTH_RESET_SUCCESS:", email);
     } catch (error: any) {
+      console.error("RESET_PASSWORD_ERROR:", {
+        code: error?.code,
+        message: error?.message,
+        email,
+      });
       const message = getErrorMessage(error);
       setState((prev) => ({ ...prev, error: message }));
       throw error;
@@ -341,6 +434,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 // Map Firebase errors to Arabic messages
 function getErrorMessage(error: any): string {
   const code = error?.code || '';
+  const rawMessage = error?.message || '';
+
+  console.log("AUTH_ERROR_MAPPED:", { code, rawMessage: rawMessage.substring(0, 200) });
 
   switch (code) {
     case 'auth/user-not-found':
@@ -371,12 +467,36 @@ function getErrorMessage(error: any): string {
       return 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
     case 'auth/requires-recent-login':
       return 'يرجى تسجيل الدخول مرة أخرى للمتابعة.';
-    case 'Firebase: Error (auth/invalid-api-key).':
+    case 'auth/unauthorized-domain':
+      return 'الدومين غير مصرح به. يرجى التواصل مع الإدارة.';
+    case 'auth/invalid-api-key':
       return 'خدمة المصادقة غير مُعدّة. يرجى التواصل مع الإدارة.';
+    case 'auth/app-not-authorized':
+      return 'التطبيق غير مصرح به. يرجى التواصل مع الإدارة.';
+    case 'auth/argument-error':
+      return 'خطأ في إعدادات المصادقة. يرجى التواصل مع الإدارة.';
+    case 'auth/web-storage-unsupported':
+      return 'المتصفح لا يدعم التخزين المحلي. جرب متصفح آخر.';
+    case 'auth/account-exists-with-different-credential':
+      return 'يوجد حساب بنفس البريد بطريقة تسجيل دخول مختلفة.';
+    case 'auth/auth-domain-config-required':
+      return 'إعدادات الدومين غير مكتملة. يرجى التواصل مع الإدارة.';
+    case 'auth/credential-already-in-use':
+      return 'بيانات الاعتماد مستخدمة بالفعل.';
+    case 'auth/timeout':
+      return 'انتهت مهلة الاتصال. تحقق من الإنترنت وحاول مرة أخرى.';
+    case 'auth/quota-exceeded':
+      return 'تم تجاوز الحد المسموح. حاول مرة أخرى لاحقاً.';
     default:
-      if (error?.message?.includes('invalid-api-key')) {
+      if (rawMessage.includes('invalid-api-key')) {
         return 'خدمة المصادقة غير مُعدّة. يرجى التواصل مع الإدارة.';
       }
-      return 'حدث خطأ غير متوقع. حاول مرة أخرى.';
+      if (rawMessage.includes('network') || rawMessage.includes('fetch')) {
+        return 'تعذر الاتصال بالخدمة. تحقق من الإنترنت وحاول مرة أخرى.';
+      }
+      if (rawMessage.includes('quota')) {
+        return 'تم تجاوز الحد المسموح. حاول مرة أخرى لاحقاً.';
+      }
+      return `حدث خطأ: ${rawMessage.substring(0, 100) || 'غير معروف'}. حاول مرة أخرى.`;
   }
 }

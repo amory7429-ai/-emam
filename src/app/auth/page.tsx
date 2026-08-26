@@ -87,8 +87,8 @@ function AuthPageInner() {
     try {
       await signInWithGoogle();
       router.replace(from);
-    } catch {
-      // Error handled by auth context
+    } catch (error: any) {
+      console.error("AUTH_PAGE_GOOGLE_ERROR:", error?.code || error?.message || error);
     } finally {
       setLoadingGoogle(false);
     }
@@ -106,8 +106,8 @@ function AuthPageInner() {
         await signUpWithEmail(email, password);
       }
       router.replace(from);
-    } catch {
-      // Error handled by auth context
+    } catch (error: any) {
+      console.error("AUTH_PAGE_EMAIL_ERROR:", error?.code || error?.message || error);
     } finally {
       setLoadingEmail(false);
     }
@@ -121,8 +121,8 @@ function AuthPageInner() {
     try {
       await resetPassword(email);
       setResetSent(true);
-    } catch {
-      // Error handled by auth context
+    } catch (error: any) {
+      console.error("AUTH_PAGE_RESET_ERROR:", error?.code || error?.message || error);
     } finally {
       setLoadingReset(false);
     }
