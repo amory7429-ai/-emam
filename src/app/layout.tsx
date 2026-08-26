@@ -4,7 +4,7 @@ import { Providers } from '@/components/Providers';
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister';
 import { OfflineIndicator } from '@/components/ui/OfflineIndicator';
 
-const SITE_URL = 'https://emam-r8r5.vercel.app';
+const SITE_URL = 'https://emam-qspv.vercel.app';
 
 export const metadata: Metadata = {
   title: {
