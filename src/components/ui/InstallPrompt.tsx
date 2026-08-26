@@ -42,8 +42,15 @@ const DISMISS_KEY = 'emam-install-dismissed';
 function wasDismissed() {
   if (typeof window === 'undefined') return false;
   try {
-    const val = sessionStorage.getItem(DISMISS_KEY);
-    return val === '1';
+    const val = localStorage.getItem(DISMISS_KEY);
+    if (!val) return false;
+    // Expire after 7 days
+    const dismissedAt = parseInt(val, 10);
+    if (Date.now() - dismissedAt > 7 * 24 * 60 * 60 * 1000) {
+      localStorage.removeItem(DISMISS_KEY);
+      return false;
+    }
+    return true;
   } catch {
     return false;
   }
@@ -51,7 +58,7 @@ function wasDismissed() {
 
 function markDismissed() {
   try {
-    sessionStorage.setItem(DISMISS_KEY, '1');
+    localStorage.setItem(DISMISS_KEY, Date.now().toString());
   } catch { /* noop */ }
 }
 

@@ -176,27 +176,14 @@ export default function MorePage() {
             </GlassCard>
           </Link>
 
-          <Link href="/prepare">
+          <Link href="/learn">
             <GlassCard className="p-4 flex items-center gap-4 hover:bg-white/5 transition-all">
               <div className="w-12 h-12 rounded-xl bg-quran-emerald/50 flex items-center justify-center text-2xl">
-                🕌
+                🎓
               </div>
               <div className="flex-1">
-                <div className="font-amiri text-lg text-quran-ivory">مُحَضِّر الصلاة</div>
-                <div className="text-xs text-quran-ivory-muted">اختيار مخصص للقراءة والاستماع حسب الصلاة</div>
-              </div>
-              <div className="text-quran-olive text-sm">←</div>
-            </GlassCard>
-          </Link>
-
-          <Link href="/quick">
-            <GlassCard className="p-4 flex items-center gap-4 hover:bg-white/5 transition-all">
-              <div className="w-12 h-12 rounded-xl bg-quran-gold/20 flex items-center justify-center text-2xl">
-                ⚡
-              </div>
-              <div className="flex-1">
-                <div className="font-amiri text-lg text-quran-ivory">مشهدين سريع</div>
-                <div className="text-xs text-quran-ivory-muted">مشهدين جاهزين بنقرة واحدة</div>
+                <div className="font-amiri text-lg text-quran-ivory">التعلم الإسلامي</div>
+                <div className="text-xs text-quran-ivory-muted">اختبار، قصص أنبياء، خطبة، رقية، تسبيح، تفسير</div>
               </div>
               <div className="text-quran-olive text-sm">←</div>
             </GlassCard>

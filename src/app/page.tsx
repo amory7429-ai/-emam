@@ -11,11 +11,37 @@ import { useAuth } from '@/lib/firebase/auth-context';
 
 export default function HomePage() {
   const [prayerData, setPrayerData] = useState<PrayerTimesResult | null>(null);
+  const [countdown, setCountdown] = useState('');
   const { user, profile } = useAuth();
 
   useEffect(() => {
     getPrayerTimes().then(setPrayerData);
   }, []);
+
+  // Live countdown timer — updates every second
+  useEffect(() => {
+    if (!prayerData?.nextPrayer?.time) return;
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const diff = prayerData.nextPrayer.time.getTime() - now.getTime();
+      if (diff <= 0) {
+        // Prayer time reached — refetch
+        getPrayerTimes(true).then(setPrayerData);
+        return;
+      }
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      setCountdown(
+        `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+      );
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [prayerData?.nextPrayer?.time]);
 
   return (
     <main className="min-h-screen pb-24">
@@ -67,16 +93,28 @@ export default function HomePage() {
                   <p className="font-amiri text-xl sm:text-2xl font-bold text-quran-gold">
                     {prayerData.nextPrayerName}
                   </p>
+                  {prayerData.nextPrayer.time.getDate() !== new Date().getDate() && (
+                    <p className="text-[10px] text-quran-gold/60 mt-0.5">غدًا</p>
+                  )}
                 </div>
                 <div className="text-left">
                   <p className="font-amiri text-lg sm:text-xl font-bold text-quran-ivory">
                     {prayerData.nextPrayer.time.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}
                   </p>
-                  <p className="text-[11px] text-quran-gold/80">
-                    {prayerData.timeToNext}
+                  <p className="font-mono text-sm text-quran-gold/90 font-bold tracking-wider">
+                    {countdown || prayerData.timeToNext}
                   </p>
                 </div>
               </div>
+              {/* Previous prayer */}
+              {prayerData.currentPrayer && (
+                <div className="mt-3 pt-3 border-t border-white/5 flex justify-between text-[11px]">
+                  <span className="text-quran-olive">الصلاة الماضية: {prayerData.currentPrayer.nameArabic}</span>
+                  <span className="text-quran-olive">
+                    {prayerData.currentPrayer.time.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                </div>
+              )}
             </div>
           )}
 

@@ -184,12 +184,12 @@ async function reverseGeocode(lat: number, lng: number): Promise<string> {
 }
 
 // ─── LOGIC ───────────────────────────────────────────────
-function getNextPrayer(times: PrayerTime[]): PrayerTime {
+function getNextPrayer(times: PrayerTime[]): PrayerTime | null {
   const now = new Date();
   for (const prayer of times) {
     if (prayer.time > now && prayer.rakahs > 0) return prayer;
   }
-  return times[0]; // Tomorrow's Fajr
+  return null; // All prayers for today have passed
 }
 
 function getCurrentPrayer(times: PrayerTime[]): PrayerTime | null {
@@ -210,13 +210,17 @@ function formatTimeToNext(nextPrayerTime: Date): string {
   const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+  // Check if next prayer is tomorrow (more than ~18 hours away = likely tomorrow's Fajr)
+  const isTomorrow = nextPrayerTime.getDate() !== now.getDate();
+  const prefix = isTomorrow ? 'غدًا ' : '';
+
   if (hours > 0) {
-    return `${hours} ساعة ${minutes > 0 ? `و ${minutes} دقيقة` : ''}`;
+    return `${prefix}${hours} ساعة ${minutes > 0 ? `و ${minutes} دقيقة` : ''}`;
   }
   if (minutes > 0) {
-    return `${minutes} دقيقة ${seconds > 30 ? 'و نصف' : ''}`;
+    return `${prefix}${minutes} دقيقة ${seconds > 30 ? 'و نصف' : ''}`;
   }
-  return `${seconds} ثانية`;
+  return `${prefix}${seconds} ثانية`;
 }
 
 function formatTime(date: Date): string {
@@ -251,15 +255,38 @@ export async function getPrayerTimes(forceRefresh = false): Promise<PrayerTimesR
     if (!forceRefresh) {
       const cached = getCachedResult(cacheKey);
       if (cached) {
-        // Update countdown (don't cache countdown)
-        cached.timeToNext = formatTimeToNext(cached.nextPrayer.time);
+        // Recalculate next prayer from cached times (don't rely on cached nextPrayer)
+        const freshNext = getNextPrayer(cached.times);
+        if (freshNext) {
+          cached.nextPrayer = freshNext;
+          cached.nextPrayerName = PRAYER_NAMES_AR[freshNext.name] || freshNext.nameArabic;
+          cached.timeToNext = formatTimeToNext(freshNext.time);
+          cached.currentPrayer = getCurrentPrayer(cached.times);
+        }
         return cached;
       }
     }
 
-    // Fetch from API
+    // Fetch today's times
     const times = await fetchFromAlAdhan(location.lat, location.lng, now);
-    const nextPrayer = getNextPrayer(times);
+    let nextPrayer = getNextPrayer(times);
+
+    // If all today's prayers have passed, fetch tomorrow's Fajr
+    if (!nextPrayer) {
+      const tomorrow = new Date(now);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const tomorrowTimes = await fetchFromAlAdhan(location.lat, location.lng, tomorrow);
+      const tomorrowFajr = tomorrowTimes.find(t => t.name === 'Fajr');
+      if (tomorrowFajr) {
+        nextPrayer = tomorrowFajr;
+      }
+    }
+
+    if (!nextPrayer) {
+      // Should never happen, but fallback
+      nextPrayer = times[0];
+    }
+
     const currentPrayer = getCurrentPrayer(times);
 
     const result: PrayerTimesResult = {
