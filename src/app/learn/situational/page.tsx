@@ -53,7 +53,7 @@ export default function SituationalPage() {
                   )}
                 </div>
               </div>
-              <p className="text-ivory/80 font-amiri text-lg leading-relaxed whitespace-pre-line">{entry.text}</p>
+              <p className="text-ivory/80 font-amiri content-text leading-relaxed whitespace-pre-line">{entry.text}</p>
               {entry.transliteration && (
                 <p className="text-ivory/50 text-sm mt-2 italic">{entry.transliteration}</p>
               )}

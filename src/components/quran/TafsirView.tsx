@@ -117,7 +117,7 @@ export default function TafsirView({ surahNumber, ayahRange }: TafsirViewProps) 
             </span>
           </div>
 
-          <p className="text-ivory/90 font-amiri text-lg leading-relaxed">
+          <p className="text-ivory/90 font-amiri content-text leading-relaxed">
             {entry.text}
           </p>
 

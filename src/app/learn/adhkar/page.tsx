@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { BottomNav } from '@/components/ui/BottomNav';
+import { DhikrCounter } from '@/components/ui/DhikrCounter';
 import { ADHKAR_SABAH, ADHKAR_MASA } from '@/lib/data/adhkar-morning-evening';
 
 type Category = 'morning' | 'evening';
@@ -59,14 +60,22 @@ export default function AdhkarPage() {
                   )}
                 </div>
               </div>
-              <p className="text-ivory/80 font-amiri text-lg leading-relaxed whitespace-pre-line">{dhikr.text}</p>
+              <p className="text-ivory/80 font-amiri content-text leading-relaxed whitespace-pre-line">{dhikr.text}</p>
               {dhikr.note && (
                 <p className="text-ivory/50 text-sm mt-3 italic">{dhikr.note}</p>
               )}
-              <div className="flex items-center gap-2 mt-3">
+              <div className="flex items-center gap-2 mt-3 mb-1">
                 <span className="text-xs px-2 py-1 rounded-full bg-gold/10 text-gold/80">{dhikr.sourceName}</span>
                 <span className="text-xs text-ivory/40">{dhikr.source}</span>
               </div>
+
+              {/* Counter */}
+              {dhikr.repetition > 1 && (
+                <DhikrCounter
+                  dhikrId={dhikr.id}
+                  target={dhikr.repetition}
+                />
+              )}
             </div>
           ))}
         </div>

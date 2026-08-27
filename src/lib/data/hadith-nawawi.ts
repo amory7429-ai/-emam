@@ -9,6 +9,7 @@ export interface Hadith {
   textArabic: string;
   source: string;
   verified: boolean;
+  explanation?: string;
 }
 
 export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
@@ -18,6 +19,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّما الأعمالُ بالنيّاتِ، وإنَّما لكلِّ امرئٍ ما نوى، فمن كانت هجرتُه إلى اللهِ ورسولِه فهجرتُه إلى اللهِ ورسولِه، ومن كانت هجرتُه إلى دنيا يصيبُها أو امرأةٍ ينكحُها فهجرتُه إلى ما هاجر إليه',
     source: 'متفق عليه — البخاري 1، مسلم 1907',
     verified: true,
+    explanation: 'الأعمال تُevaluate بنيّة صاحبها. حُكم العمل يتحدد بنية Фاعله: إن نوى به وجه الله ثبت له ثوابه، وإن نوى به الدنيا فقط لم يكن له عند الله من الثواب.',
   },
   {
     id: 2,
@@ -25,6 +27,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'الدِّينُ النَّصيحةُ. قُلْنَا: لِمَنْ؟ قَالَ: للهِ، ولكتابِه، ولرسولِه، ولأئمَّةِ المسلمينَ، وعامَّتِهم',
     source: 'رواه مسلم 55',
     verified: true,
+    explanation: 'الدين كله نصيحة: نصيحة لله في طاعته واجتناب نواهيه، ونصيحة لكتابه في تعلمه والعمل به، ونصيحة لرسوله في 타بّع سنته ونشر دينه.',
   },
   {
     id: 3,
@@ -32,6 +35,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'بُنِيَ الإسلامُ على خمسٍ: شهادةِ أن لا إله إلا اللهُ وأنَّ محمَّداً رسولُ اللهِ، وإقامِ الصلاةِ، وإيتاءِ الزكاةِ، وحجِّ البيتِ، وصومِ رمضانَ',
     source: 'رواه البخاري 8، مسلم 16',
     verified: true,
+    explanation: 'أركان الإسلام الخمسة هي الأساس الذي يُبنى عليه دين المسلم: الشهادتان، والصلاة، والزكاة، والحج، وصيام رمضان.',
   },
   {
     id: 4,
@@ -39,6 +43,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ الحلالَ بيِّنٌ وإنَّ الحرامَ بيِّنٌ، وبينهما أمورٌ مشتبهاتٌ لا يعلَمُهنَّ كثيرٌ من الناسِ، فمن اتَّقى الشُّبُهاتِ فقد استبرأ لدينِه وعرضِه، ومن وقع في الشُّبُهاتِ وقع في الحرامِ، كالراعي يرعى حول الحمى يوشكُ أن يرتع فيه، ألا وإنَّ لكلِّ مَلكٍ حمى، ألا وإنَّ حمى اللهِ محارِمُه',
     source: 'متفق عليه — البخاري 52، مسلم 1599',
     verified: true,
+    explanation: 'الحلال والحرام واضحان، وبينهما منطقة مشتبهات يقع فيها كثير من الناس. من حافظ على اجتناب الشبهات حفظ على دينه وعرضه، ومن دخل فيها وقع في الحرام.',
   },
   {
     id: 5,
@@ -46,6 +51,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ تعالى يقولُ: ما تقرَّبَ إليَّ عبديُ بشيءٍ أحبَّ إليَّ ممّا افترضتُ عليهُ، وما زالَ عبديُ يتقرَّبُ إليَّ بالنوافلِ حتى أُحبَّهُ، فإذا أحببتُهُ كنتُ سمعَهُ الذي يسمعُ بهِ، وبصرَهُ الذي يُبصِرُ بهِ، ويَدَهُ التي يَبطِشُ بهاِ، ورِجلَهُ التي يمشي بهاِ',
     source: 'رواه البخاري 6502',
     verified: true,
+    explanation: 'النوافل تُقرِّب العبد من الله حتى يُحبّه، فإذا أحبّه الله صار سمعه وبصره ويده التي يبطش بها، أي: جعله في خدمة طاعته.',
   },
   {
     id: 6,
@@ -53,6 +59,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ كَتَبَ الحسناتِ والسيِّئاتِ، ثمَّ بيَّنَ ذلكَ، فمن همَّ بحسنةٍ فلم يعملها كُتبت له حسنةً كاملةً، فإنْ عملها كُتبت له عشرُ حسناتٍ إلى أربعمائةِ حسنةٍ، ومن همَّ بسيِّئةٍ فلم يعملها لم تُكتب عليه، فإنْ عملها كُتبت سيِّئةً واحدةً',
     source: 'رواه البخاري 6491، مسلم 131',
     verified: true,
+    explanation: 'الهمّ بالحسنة يُكتب حسنة كاملة، والعمل بها يُضاعف إلى أربعمائة. أمّا السيّئة: فمن همّ بها ولم يعملها لم تُكتب، فإن عملها كُتبت واحدة فقط.',
   },
   {
     id: 7,
@@ -60,6 +67,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'الصيام جنة، فإذا كان يوم صوم أحدكم فلا يرفث ولا يصخب، فإن سابه أحد أو قاتله فليقل: إني صائم',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الصيام جُنة (حاجز) من النار ومن المعاصي. على الصائم أن يحافظ على لسانه وصفاته، فإن أغضبه أحد فليقل: إني صائم.',
   },
   {
     id: 8,
@@ -67,6 +75,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'طلبُ العلمِ فريضةٌ على كلِّ مسلمٍ',
     source: 'رواه ابن ماجه 224',
     verified: true,
+    explanation: 'طلب العلم الشرعي فريضة كفاية على المسلمين، و누ّابة على الأفراد. العلم نور يهدي إلى الصراط المستقيم.',
   },
   {
     id: 9,
@@ -74,6 +83,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنِّي لأعرفُ أشدَّكم خشيةً للهِ أنا، قالوا: نحن يا رسولَ اللهِ، قال: نعم، أشدُّكم خشيةً للهِ أنا',
     source: 'رواه البخاري 60، مسلم 3008',
     verified: true,
+    explanation: 'النبي ﷺ أشدّ الناس خشية لله تعالى، وهي الصفة التي تجعل العبد محافظًا على طاعة الله في الظاهر والباطن.',
   },
   {
     id: 10,
@@ -81,6 +91,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ لا ينظرُ إلى صورِكم وأموالِكم، ولكنَّ ينظرُ إلى قلوبِكم وأعمالِكم',
     source: 'رواه مسلم 2564',
     verified: true,
+    explanation: 'الله لا ينظر إلى الظاهر من الصور والأموال، بل ينظر إلى ما في القلوب من إيمان ونيّة، وما في الأعمال من صدق.',
   },
   {
     id: 11,
@@ -88,6 +99,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ جميلٌ يحبُّ الجمالَ',
     source: 'رواه مسلم 91',
     verified: true,
+    explanation: 'الله جميل في ذاته وصفاته، يحب الجمال في كل شيء: الجمال في الخُلق والخُلق والعمل والalothing.',
   },
   {
     id: 12,
@@ -95,6 +107,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا ضَرَرَ ولا ضِرارَ',
     source: 'رواه ابن ماجه 2341، الدارمي 1768',
     verified: true,
+    explanation: 'الأصل في الشريعة نفي الضرر. لا يجوز للمرء أن يضرّ بنفسه أو بغيره، ولا أن يضادّ أحدًا ضارًّا إياه.',
   },
   {
     id: 13,
@@ -102,6 +115,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا يُؤمِنُ أحدُكم حتى يُحبَّ لأخيهِ ما يُحبُّ لنفسِهِ',
     source: 'رواه البخاري 13، مسلم 45',
     verified: true,
+    explanation: 'الإيمان الكامل يتطلّب حبّ الخير للمسلمين كلهم، كما يحبّه لنفسه. هذا من كمال الإيمان.',
   },
   {
     id: 14,
@@ -109,6 +123,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'اجتنِبِ المحارِمَ تكُن أعبَدَ الناسِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'من حافظ على اجتناب المحرّمات كان أشدّ عبادة لله من كثير من العبادات الظاهرة.',
   },
   {
     id: 15,
@@ -116,6 +131,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'ارضَ بما قسم اللهُ لك تكُن أغنَى الناسِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الرضا بقضاء الله غنى عن الخلق، فمن رضي بما قسمه الله له لم يحتج إلى أحد.',
   },
   {
     id: 16,
@@ -123,6 +139,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'من لم تنهه صلاتُه عن الفاحشِي والمنكرِ فلا صلاةَ له',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الصلاة حقّ إذا أديت كما يجب نهت صاحبها عن الفحشاء والمنكر، وإلا فهي صلاة ناقصة لا ثمرة لها.',
   },
   {
     id: 17,
@@ -130,6 +147,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تَمُنَّوا على الناسِ فَتَمُنُّوا على اللهِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'المنّ على الناس بال Axealty يُشبه الامتنان على الله، لأنّ العطاء من الله وحده.',
   },
   {
     id: 18,
@@ -137,6 +155,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ تعالى يقولُ يومَ القيامةِ: أنا الملكُ أنا اللهُ، أينَ جبّارُ الرحمنِ أينَ المتكبِّرُ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'يوم القيامة يتجلّى الله بالملك المطلق، ويسأل عن المتكبّرين الذين ادّعواملكًا غير ملكه.',
   },
   {
     id: 19,
@@ -144,6 +163,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا يُكرهُ امرأٌ على امرأٍ فإنَّها لا تأتي على أمرٍ لم تؤهَّلْ له',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'لا يُجبر أحد على شيء لا يريد أو لا يقدر عليه، فإنّ الأمر يُقدّر بحسب الطاقة والإرادة.',
   },
   {
     id: 20,
@@ -151,6 +171,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'المسلمُ من سلَّمَ المسلمونَ من لسانِه ويديهِ والمهاجرُ من هجرَ ما نهى اللهُ عنهُ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'المسلم الحقيقي من سلّم المسلمون من لسانه (بالكلام الطيّب) ويديه (بال-work الصالح). والمهاجر من هجر المعاصي.',
   },
   {
     id: 21,
@@ -158,6 +179,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا يُصليَنَّ أحدُكم عندَ مَثْعَبِ الكَلْبِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'يُنهى عن الصلاة في أماكن قذرة أو فيها something يُنفر من الخشوع.',
   },
   {
     id: 22,
@@ -165,6 +187,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تجلسوا على القُبُورِ ولا تُصلُّوا إليها فإنَّها تكلَّمُ أصحَابَها اليومَ بما يكرهونَ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الجلوس على القبور والصلاة إليها مكروه، فإنّها تكلّم أصحابها بما يكرهون من ت胠ّضهم.',
   },
   {
     id: 23,
@@ -172,6 +195,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تزالُ أمَّتي بخيرٍ ما لم يُؤذِّوا ذِمَّهم',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الأمة Muslimة تبقى على الخير ما دامت تحافظ على حقوق غير المسلمين من أهل الذمّة.',
   },
   {
     id: 24,
@@ -179,6 +203,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تُصِلُّوا لوقتٍ ولا تتقدَّموا عنهُ، وبيْنَ ذلكَ صلاةٌ في غيرِ وقتٍ لا تُفعلُها',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'يُنهى عن الإسراف في الصلاة (كالإكثار من الرواتب)”modified” or عن التقدّم على الوقت المحدّد.',
   },
   {
     id: 25,
@@ -186,6 +211,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إذا ماتَ الإنسانُ انقطعَ عنهُ عملُهُ إلا من ثلاثةٍ: صدقةٍ جاريةٍ، أو علمٍ يُنتفعُ بهِ، أو ولدٍ صالحٍ يدعو لهُ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'بعد الموت ينقطع العمل إلا من ثلاثة: صدقة جارية (كمسجد أو سبيل خير)، علم يُنتفع به (طلّاب يعملون به)، أو ولد صالح يدعو له.',
   },
   {
     id: 26,
@@ -193,6 +219,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ العبدَ إذا وقفَ بينَ يديِ ربِّهِ تباركَ وتعالى يومَ القيامةِ فلَم يُحاسَبْ فيما صنعَ فقد هلكَ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الحساب يوم القيامة دليل على رحمة الله، فمن لم يُحاسب على ذنوبه فقد هلك خوفًا من أنّه لم يكن م计数ًا.',
   },
   {
     id: 27,
@@ -200,6 +227,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'أكملُ المؤمنينَ إيماناً أحسنُهم خُلُقاً، وخيارُكم خيارُكم لنسائِهم',
     source: 'رواه أبو داود 4682، الترمذي 1162',
     verified: true,
+    explanation: 'أكمل المؤمنين إيمانًا أحسنهم خُلقًا مع الناس، وخيارهم خيارهم في معاملة أزواجهم.',
   },
   {
     id: 28,
@@ -207,6 +235,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ إذا أحبَّ عبداً دعا جِبريلَ فقال: إنِّي أحبُّ فلاناً فأحبِّهُ فيُحبُّهُ جِبريلُ ثمَّ يُنادي في السماءِ فيقول: إنَّ اللهَ يُحبُّ فلاناً فأحبُّوهُ فيُحبُّهُ أهلُ السماءِ، ثمَّ يُوضَعُ لهُ القبولُ في الأرضِ',
     source: 'رواه البخاري 6040، مسلم 2637',
     verified: true,
+    explanation: 'من أحبّه الله دعا جبريل فأحبّه، ثم ينادي في السماء فيُحبّه أهل السماء، ويوضع له القبول في الأرض.',
   },
   {
     id: 29,
@@ -214,6 +243,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ إذا أرادَ بالعبدِ الخيرَ عقَّبهُ',
     source: 'رواه البخاري 5645، مسلم 2998',
     verified: true,
+    explanation: 'من أراد الله به خيرًا ابتلاه ومحّصه، فالابتلاء تطهير للمؤمن ورفعة له.',
   },
   {
     id: 30,
@@ -221,6 +251,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'ما نقصتْ صدقةٌ من مالٍ، وما زادَ اللهُ عبداً بعفوٍ إلا عزّاً، وما تواضعُ أحدٍ للهِ إلا رفعَهُ اللهُ',
     source: 'رواه مسلم 2588',
     verified: true,
+    explanation: 'الصدقة لا تنقص المال بل تزكيه، والعفو يُقوّي العزّ، والتواضع لله يرفع المكانة.',
   },
   {
     id: 31,
@@ -228,6 +259,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ تعالى يقولُ: يا ابنَ آدمَ أدِّ حَقَّكَ وأَدِّ حَقَّ إخْوانِكَ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الله يأمر باداء الحقوق: حقّ الله في طاعته، وحقوق الناس في معاملتهم بالعدل.',
   },
   {
     id: 32,
@@ -235,6 +267,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا حسدَ إلا في اثنتينِ: رجلٌ آتاهُ اللهُ القرآنَ فيقومُ بهِ آناءَ الليلِ وآناءَ النهارِ، ورجلٌ آتاهُ اللهُ مالاً فيُنفِقُهُ آناءَ الليلِ وآناءَ النهارِ',
     source: 'رواه البخاري 5025، مسلم 815',
     verified: true,
+    explanation: 'لا حسد إلا في اثنتين: رجل آتاه الله القرآن فيقوم به ليلاً ونهاراً، ورجل آتاه الله مالاً فينفقه في طاعة الله ليلاً ونهاراً.',
   },
   {
     id: 33,
@@ -242,6 +275,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'من سلَكَ طريقاً يلتمسُ فيهِ علماً سهلَ اللهُ لهُ طريقاً إلى الجنةِ، وإنَّ الملائكةَ لتخفضُ أجنحتَها لطالبِ العلمِ رضىً بما يصنعُ، وإنَّ العالِمَ يستغفِرُ لهُ من في السماواتِ ومن في الأرضِ، والحيتانُ في مَياهِها، وإنَّ فضلِ العالِمِ على العابدِ كفضلِ القمرِ ليلةَ البدرِ على سائرِ الكواكبِ، وإنَّ العُلماءَ ورثةُ الأنبياءِ، وإنَّ الأنبياءَ لم يورِثُوا ديناراً ولا درهماً، إنَّما ورِّثُوا العلمَ فمن أخذهُ أخذَ بحظٍّ وافرٍ',
     source: 'رواه أبو داود 3641، الترمذي 2682',
     verified: true,
+    explanation: 'طالب العلم في ذمة الله، والملائكة تخفض له أجنحتها، والعالم يستغفر له كل شيء في الكون.',
   },
   {
     id: 34,
@@ -249,6 +283,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'من دعا إلى هدىٍ كان لهُ من الأجرِ مثلُ أجرِ من تبعَهُ لا ينقصُ من أجرِهِم شيئاً، ومن دعا إلى ضلالةٍ كان عليهِ من الوزرِ مثلُ أوزارِ من تبعَهُ لا ينقصُ من أوزارِهم شيئاً',
     source: 'رواه مسلم 2674',
     verified: true,
+    explanation: 'من دعا إلى الهدى أُجري له مثل أجر من تبعه دون نقصان، ومن دعا إلى الضلالة حمِل وزر من تبعه.',
   },
   {
     id: 35,
@@ -256,6 +291,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'من لزمَ كلامَ اللهِ تعالى فُتحَ لهُ بابٌ إلى الجنةِ، ومن تركَهُ فُتحَ لهُ بابٌ إلى النارِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'من لزم قراءة القرآن والعمل به فُتح له باب الجنة، ومن أعرض عنه فُتح له باب النار.',
   },
   {
     id: 36,
@@ -263,6 +299,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'الدُّعاءُ هوُ العبادةُ، ثمَّ تلا هذهِ الآيةَ: وقالَ ربكُمُ ادْعوني أستجِبْ لكم، إنَّ الذينَ يَسْتَكْبِرُونَ عَنْ عِبَادَتِي سَيَدْخُلُونَ جَهَنَّمَ دَاخِرِينَ',
     source: 'رواه أبو داود 1474، الترمذي 2969',
     verified: true,
+    explanation: 'الدعاء هو جوهر العبادة، وهو خطاب العبد لربّه. من كبر عن الدخول في عبادة الله دخل جهنم داخراً.',
   },
   {
     id: 37,
@@ -270,6 +307,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'تفكَّروا في آلاءِ اللهِ ولا تفكَّروا في اللهِ، فإنَّهُ لا طاقةَ لكم بذلكَ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'التفكّر في نعم الله وآلاءه ممكن ومطلوب، أمّا التفكّر في ذات الله فمستحيل على العقول.',
   },
   {
     id: 38,
@@ -277,6 +315,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'سبحانَ اللهِ والحمدُ للهِ ولا إلهَ إلا اللهُ واللهُ أكبرُ ولا حولَ ولا قوّةَ إلا باللهِ',
     source: 'رواه البخاري 6403، مسلم 3862',
     verified: true,
+    explanation: 'هذه الأذكار الخمس كنوز من كنوز الجنة، وهي كلمات يُثاب عليها العبد في كل وقت.',
   },
   {
     id: 39,
@@ -284,6 +323,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تحاسدوا، ولا تتباغضوا، ولا تدابروا، وكونوا عبادَ اللهِ إخواناً',
     source: 'رواه البخاري 6065، مسلم 2564',
     verified: true,
+    explanation: 'الأمر بالأخوّة والتواصل وترك الحسد والتباغض والتدابر.',
   },
   {
     id: 40,
@@ -291,5 +331,6 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا يُكرهُ أحدُكم أن يقبلَ ثلاثاً في اليومِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
+    explanation: 'الlocksع على القبور أو يُصلي إليها مكروه، لأنّها تكلّم أصحابها بما يكرهون.',
   },
 ];

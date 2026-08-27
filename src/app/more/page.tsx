@@ -129,32 +129,18 @@ export default function MorePage() {
             <div className="flex justify-between items-center text-sm">
               <span className="text-quran-ivory-muted">حجم الخط</span>
               <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map(s => (
+                {['صغير', 'متوسط', 'كبير', 'كبير جداً', 'ضخم'].map((label, i) => (
                   <button
-                    key={s}
-                    onClick={() => updateSettings({ fontSize: s })}
-                    className={`w-9 h-9 rounded text-xs font-bold transition-all ${
-                      settings.fontSize === s ? 'bg-quran-gold text-quran-bg' : 'glass text-quran-ivory-muted'
+                    key={i + 1}
+                    onClick={() => updateSettings({ fontSize: i + 1 })}
+                    className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
+                      settings.fontSize === i + 1 ? 'bg-quran-gold text-quran-bg' : 'glass text-quran-ivory-muted'
                     }`}
                   >
-                    {s}
+                    {label}
                   </button>
                 ))}
               </div>
-            </div>
-
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-quran-ivory-muted">الترجمة</span>
-              <button
-                onClick={() => updateSettings({ showTranslation: !settings.showTranslation })}
-                className={`w-11 h-6 rounded-full transition-all relative ${
-                  settings.showTranslation ? 'bg-quran-gold' : 'bg-white/10'
-                }`}
-              >
-                <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-all ${
-                  settings.showTranslation ? 'right-0.5' : 'right-[22px]'
-                }`} />
-              </button>
             </div>
           </div>
         </GlassCard>

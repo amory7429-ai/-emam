@@ -71,7 +71,7 @@ export default function HadithPage() {
               </h2>
               
               {showText[currentHadith.id] !== false ? (
-                <p className="font-amiri text-xl leading-loose text-quran-ivory text-right mb-4">
+                <p className="font-amiri content-text text-quran-ivory text-right mb-4">
                   {currentHadith.textArabic}
                 </p>
               ) : (
@@ -85,8 +85,18 @@ export default function HadithPage() {
                   </button>
                 </div>
               )}
-              
-              <div className="flex gap-2">
+
+              {/* Explanation */}
+              {currentHadith.explanation && (
+                <div className="mt-4 p-3 bg-white/5 rounded-xl border border-white/5">
+                  <p className="text-xs text-quran-gold font-bold mb-1.5">شرح مبسط</p>
+                  <p className="text-sm text-quran-ivory-muted leading-relaxed text-right">
+                    {currentHadith.explanation}
+                  </p>
+                </div>
+              )}
+
+              <div className="flex gap-2 mt-3">
                 <button
                   onClick={() => handleCopy(currentHadith.textArabic, currentHadith.id)}
                   className="flex-1 min-h-[44px] glass rounded-xl py-2.5 text-sm text-quran-ivory-muted hover:text-quran-ivory hover:bg-white/5 transition-all"

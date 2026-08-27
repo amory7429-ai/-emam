@@ -55,7 +55,7 @@ export default function DuaPage() {
                     )}
                   </div>
                 </div>
-                <p className="text-ivory/80 font-amiri text-lg leading-relaxed whitespace-pre-line">{dua.text}</p>
+                <p className="text-ivory/80 font-amiri content-text leading-relaxed whitespace-pre-line">{dua.text}</p>
                 {dua.note && (
                   <p className="text-ivory/50 text-sm mt-3 italic">{dua.note}</p>
                 )}

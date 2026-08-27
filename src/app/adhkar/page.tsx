@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { BottomNav } from '@/components/ui/BottomNav';
 import { GlassCard } from '@/components/ui/GlassCard';
+import { DhikrCounter } from '@/components/ui/DhikrCounter';
 import { ADHKAR_AFTER_SALAH } from '@/lib/data/adhkar';
 
 export default function AdhkarPage() {
@@ -42,18 +43,27 @@ export default function AdhkarPage() {
                 </span>
               )}
             </div>
-            <p className="font-amiri text-xl leading-loose text-quran-ivory mb-4 text-right">
+            <p className="font-amiri content-text text-quran-ivory mb-4 text-right">
               {dhikr.text}
             </p>
             {dhikr.note && (
               <p className="text-xs text-quran-ivory-muted mb-3">💡 {dhikr.note}</p>
             )}
-            <button
-              onClick={() => handleCopy(dhikr.text, dhikr.id)}
-              className="w-full glass rounded-xl py-2.5 text-sm text-quran-ivory-muted hover:text-quran-ivory hover:bg-white/5 transition-all"
-            >
-              {copiedId === dhikr.id ? '✓ تم النسخ' : '📋 نسخ'}
-            </button>
+
+            {/* Counter for dhikrs with repetition > 1 */}
+            {dhikr.repetition > 1 ? (
+              <DhikrCounter
+                dhikrId={dhikr.id}
+                target={dhikr.repetition}
+              />
+            ) : (
+              <button
+                onClick={() => handleCopy(dhikr.text, dhikr.id)}
+                className="w-full glass rounded-xl py-2.5 text-sm text-quran-ivory-muted hover:text-quran-ivory hover:bg-white/5 transition-all"
+              >
+                {copiedId === dhikr.id ? '✓ تم النسخ' : '📋 نسخ'}
+              </button>
+            )}
           </GlassCard>
         ))}
       </div>

@@ -11,6 +11,7 @@
   --color-gold: #C6A15B;
   --color-ivory: #F4EFE5;
   --color-ivory-muted: #9AA39D;
+  --content-font-size: 18px;
   --font-amiri: 'Amiri', serif;
   --font-qalam: 'Noto Naskh Arabic', sans-serif;
   --font-inter: 'Inter', system-ui, sans-serif;
@@ -35,6 +36,11 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.content-text {
+  font-size: var(--content-font-size);
+  line-height: 1.8;
 }
 
 .glass {

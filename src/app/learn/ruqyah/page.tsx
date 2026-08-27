@@ -58,7 +58,7 @@ export default function RuqyahPage() {
                   )}
                 </div>
               </div>
-              <p className="text-ivory/80 font-amiri text-lg leading-relaxed whitespace-pre-line">{entry.text}</p>
+              <p className="text-ivory/80 font-amiri content-text leading-relaxed whitespace-pre-line">{entry.text}</p>
               {entry.note && (
                 <p className="text-ivory/50 text-sm mt-3 italic">{entry.note}</p>
               )}

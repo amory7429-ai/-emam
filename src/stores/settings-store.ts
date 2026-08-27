@@ -14,8 +14,7 @@ export interface UserSettings {
 
   // Quran
   defaultReciterId: number;
-  fontSize: number; // 1-5 scale
-  showTranslation: boolean;
+  fontSize: number; // 1-5 scale: 1=small, 2=medium, 3=large, 4=xl, 5=xxl
 
   // App
   theme: 'dark' | 'light' | 'system';
@@ -42,7 +41,6 @@ const DEFAULT_SETTINGS: UserSettings = {
   country: 'EG',
   defaultReciterId: 7,
   fontSize: 3,
-  showTranslation: false,
   theme: 'dark',
   hapticFeedback: true,
   uid: null,
