@@ -33,6 +33,12 @@ const JUZ_END: Record<number, number> = {
   27:50, 28:57, 29:66, 30:114,
 };
 
+const LEVELS = [
+  { id: 'short' as const, name: 'تحضير قصير', desc: 'مختصر: 5 آيات', emoji: '⚡' },
+  { id: 'medium' as const, name: 'تحضير متوسط', desc: 'متوسط: 8 آيات', emoji: '📖' },
+  { id: 'long' as const, name: 'تحضير طويل', desc: 'طويل: 12 آيات', emoji: '📚' },
+];
+
 export default function QuickPage() {
   return (
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="text-quran-ivory-muted">جارٍ التحميل...</p></div>}>
@@ -43,7 +49,8 @@ export default function QuickPage() {
 
 function QuickPageInner() {
   const searchParams = useSearchParams();
-  const [step, setStep] = useState<'choose-juz' | 'result'>('choose-juz');
+  const [step, setStep] = useState<'choose-level' | 'choose-juz' | 'result'>('choose-level');
+  const [preparationLevel, setPreparationLevel] = useState<'short' | 'medium' | 'long'>('medium');
   const [selectedJuz, setSelectedJuz] = useState<number | null>(null);
   const [rakah1, setRakah1] = useState<Passage | null>(null);
   const [rakah2, setRakah2] = useState<Passage | null>(null);
@@ -80,12 +87,14 @@ function QuickPageInner() {
     const endSurah = JUZ_END[juz];
     const candidates: Passage[] = [];
 
+    const passageLengthMap = { short: 5, medium: 8, long: 12 };
+    const passageLength = passageLengthMap[preparationLevel];
+
     for (let s = startSurah; s <= endSurah; s++) {
       const meta = SURAH_META.find(sm => sm.id === s);
       if (!meta) continue;
 
       const maxAyah = meta.ayahs;
-      const passageLength = maxAyah <= 10 ? Math.min(5, maxAyah) : maxAyah <= 30 ? 8 : 12;
 
       for (let start = 1; start <= maxAyah - passageLength + 1; start += passageLength) {
         const end = Math.min(start + passageLength - 1, maxAyah);
@@ -110,19 +119,15 @@ function QuickPageInner() {
       return;
     }
 
-    // Sort by Mushaf order: surah number first, then ayah position
     candidates.sort((a, b) => a.surahNumber - b.surahNumber || a.ayahStart - b.ayahStart);
 
-    // Strategy: prefer same surah, then neighboring surahs in order
     let selected1 = candidates[0];
     let selected2: Passage | null = null;
 
-    // Try same surah first
     const sameSurah = candidates.filter(c => c.surahNumber === selected1.surahNumber && c.id !== selected1.id);
     if (sameSurah.length > 0) {
       selected2 = sameSurah[0];
     } else {
-      // Find next passage in Mushaf order (later or same position)
       const laterCandidates = candidates.filter(c => c.id !== selected1.id);
       if (laterCandidates.length > 0) {
         selected2 = laterCandidates[0];
@@ -152,7 +157,7 @@ function QuickPageInner() {
             مش محضّر؟
           </h1>
           <p className="text-sm text-quran-ivory-muted">
-            اختَر جزءًا وسنجهز لك مشهدين للصلاة
+            اختَر مستوى التحضير ثم الجزء وسنجهز لك مشهدين للصلاة
           </p>
           {usedThisMonth > 0 && (
             <p className="text-xs text-quran-olive mt-1">
@@ -163,8 +168,46 @@ function QuickPageInner() {
       </header>
 
       <div className="max-w-lg mx-auto px-4 py-6">
+        {step === 'choose-level' && (
+          <div className="animate-fade-in">
+            <h2 className="font-amiri text-lg font-bold text-quran-ivory mb-4">
+              اختر مستوى التحضير
+            </h2>
+            <div className="space-y-3">
+              {LEVELS.map(level => (
+                <GlassCard
+                  key={level.id}
+                  onClick={() => { setPreparationLevel(level.id); setStep('choose-juz'); }}
+                  className={`p-4 cursor-pointer ${preparationLevel === level.id ? 'ring-2 ring-quran-gold' : ''}`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-3xl">{level.emoji}</span>
+                    <div className="flex-1">
+                      <div className="font-amiri text-lg font-bold text-quran-ivory">
+                        {level.name}
+                      </div>
+                      <div className="text-sm text-quran-ivory-muted">
+                        {level.desc}
+                      </div>
+                    </div>
+                    {preparationLevel === level.id && (
+                      <span className="text-quran-gold text-xl">✓</span>
+                    )}
+                  </div>
+                </GlassCard>
+              ))}
+            </div>
+          </div>
+        )}
+
         {step === 'choose-juz' && (
           <div className="animate-fade-in">
+            <button
+              onClick={() => setStep('choose-level')}
+              className="mb-4 text-sm text-quran-ivory-muted hover:text-quran-ivory"
+            >
+              ← تغيير مستوى التحضير
+            </button>
             <h2 className="font-amiri text-lg font-bold text-quran-ivory mb-4">
               اختر الجزء
             </h2>
@@ -318,7 +361,7 @@ function QuickPageInner() {
 
             <div className="flex gap-3 mt-6">
               <button
-                onClick={() => { setStep('choose-juz'); setMode('choose'); }}
+                onClick={() => { setStep('choose-level'); setMode('choose'); }}
                 className="flex-1 glass rounded-xl py-3 text-quran-ivory-muted hover:text-quran-ivory transition-colors text-sm"
               >
                 اختيار جزء آخر

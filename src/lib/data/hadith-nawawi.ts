@@ -1,4 +1,4 @@
-// الأربعون النووية — Hadith al-Nawawi (40 Hadith)
+﻿// الأربعون النووية — Hadith al-Nawawi (40 Hadith)
 // Source: Imam al-Nawawi's Al-Arba'in al-Nawawiyyah
 // NOTE: Texts below are sourced from standard printed editions.
 // Some hadith (#5-7, #14-26, #35-40) need specialist verification before claiming full verification.
@@ -19,7 +19,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّما الأعمالُ بالنيّاتِ، وإنَّما لكلِّ امرئٍ ما نوى، فمن كانت هجرتُه إلى اللهِ ورسولِه فهجرتُه إلى اللهِ ورسولِه، ومن كانت هجرتُه إلى دنيا يصيبُها أو امرأةٍ ينكحُها فهجرتُه إلى ما هاجر إليه',
     source: 'متفق عليه — البخاري 1، مسلم 1907',
     verified: true,
-    explanation: 'الأعمال تُevaluate بنيّة صاحبها. حُكم العمل يتحدد بنية Фاعله: إن نوى به وجه الله ثبت له ثوابه، وإن نوى به الدنيا فقط لم يكن له عند الله من الثواب.',
+    explanation: 'الأعمال تُحسب بنيّة صاحبها، فحُكم العمل يتحدد بنية الفاعل: إن نوى به وجه الله ثبت له ثوابه، وإن نوى به الدنيا فقط لم يكن له عند الله من الثواب.',
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'الدِّينُ النَّصيحةُ. قُلْنَا: لِمَنْ؟ قَالَ: للهِ، ولكتابِه، ولرسولِه، ولأئمَّةِ المسلمينَ، وعامَّتِهم',
     source: 'رواه مسلم 55',
     verified: true,
-    explanation: 'الدين كله نصيحة: نصيحة لله في طاعته واجتناب نواهيه، ونصيحة لكتابه في تعلمه والعمل به، ونصيحة لرسوله في 타بّع سنته ونشر دينه.',
+    explanation: 'الدين كله نصيحة: نصيحة لله في طاعته واجتناب نواهيه، ونصيحة لكتابه في تعلمه والعمل به، ونصيحة لرسوله في اتّباع سنته ونشر دينه.',
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ تعالى يقولُ: ما تقرَّبَ إليَّ عبديُ بشيءٍ أحبَّ إليَّ ممّا افترضتُ عليهُ، وما زالَ عبديُ يتقرَّبُ إليَّ بالنوافلِ حتى أُحبَّهُ، فإذا أحببتُهُ كنتُ سمعَهُ الذي يسمعُ بهِ، وبصرَهُ الذي يُبصِرُ بهِ، ويَدَهُ التي يَبطِشُ بهاِ، ورِجلَهُ التي يمشي بهاِ',
     source: 'رواه البخاري 6502',
     verified: true,
-    explanation: 'النوافل تُقرِّب العبد من الله حتى يُحبّه، فإذا أحبّه الله صار سمعه وبصره ويده التي يبطش بها، أي: جعله في خدمة طاعته.',
+    explanation: 'النوافل تُقرِّب العبد من الله حتى يُحبّه، فإذا أحبّه الله صار سمعه وبصره ويده التي يبطش بها في خدمة طاعته وذِكره.',
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'طلبُ العلمِ فريضةٌ على كلِّ مسلمٍ',
     source: 'رواه ابن ماجه 224',
     verified: true,
-    explanation: 'طلب العلم الشرعي فريضة كفاية على المسلمين، و누ّابة على الأفراد. العلم نور يهدي إلى الصراط المستقيم.',
+    explanation: 'طلب العلم الشرعي فريضة كفاية على المسلمين، وفرض عين على الأفراد. العلم نور يهدي إلى الصراط المستقيم.',
   },
   {
     id: 9,
@@ -99,7 +99,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ جميلٌ يحبُّ الجمالَ',
     source: 'رواه مسلم 91',
     verified: true,
-    explanation: 'الله جميل في ذاته وصفاته، يحب الجمال في كل شيء: الجمال في الخُلق والخُلق والعمل والalothing.',
+    explanation: 'الله جميل في ذاته وصفاته، يحب الجمال في كل شيء: الجمال في الخُلق والخُلق والعمل والزينة.',
   },
   {
     id: 12,
@@ -107,7 +107,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا ضَرَرَ ولا ضِرارَ',
     source: 'رواه ابن ماجه 2341، الدارمي 1768',
     verified: true,
-    explanation: 'الأصل في الشريعة نفي الضرر. لا يجوز للمرء أن يضرّ بنفسه أو بغيره، ولا أن يضادّ أحدًا ضارًّا إياه.',
+    explanation: 'الأصل في الشريعة نفي الضرر. لا يجوز للمرء أن يضرّ بنفسه أو بغيره، ولا أن يضادّ أحدًا ضارًّا إياه.',
   },
   {
     id: 13,
@@ -147,7 +147,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تَمُنَّوا على الناسِ فَتَمُنُّوا على اللهِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'المنّ على الناس بال Axealty يُشبه الامتنان على الله، لأنّ العطاء من الله وحده.',
+    explanation: 'لا تُظهروا النِعمة على الناس كأنك تُعطيهم من عندك، لأنّ كل خير من الله وحده. فالمنّ يُغلي صاحبه عند الله وينفّر الناس.',
   },
   {
     id: 18,
@@ -155,7 +155,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ اللهَ تعالى يقولُ يومَ القيامةِ: أنا الملكُ أنا اللهُ، أينَ جبّارُ الرحمنِ أينَ المتكبِّرُ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'يوم القيامة يتجلّى الله بالملك المطلق، ويسأل عن المتكبّرين الذين ادّعواملكًا غير ملكه.',
+    explanation: 'يوم القيامة يتجلّى الله بالملك المطلق، ويسأل عن المتكبّرين الذين ادّعوا ملكًا غير ملكه.',
   },
   {
     id: 19,
@@ -171,7 +171,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'المسلمُ من سلَّمَ المسلمونَ من لسانِه ويديهِ والمهاجرُ من هجرَ ما نهى اللهُ عنهُ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'المسلم الحقيقي من سلّم المسلمون من لسانه (بالكلام الطيّب) ويديه (بال-work الصالح). والمهاجر من هجر المعاصي.',
+    explanation: 'المسلم الحقيقي من سلّم المسلمون من لسانه (بالكلام الطيّب) ويديه (بالعمل الصالح). والمهاجر من هجر المعاصي.',
   },
   {
     id: 21,
@@ -179,7 +179,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا يُصليَنَّ أحدُكم عندَ مَثْعَبِ الكَلْبِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'يُنهى عن الصلاة في أماكن قذرة أو فيها something يُنفر من الخشوع.',
+    explanation: 'يُنهى عن الصلاة في أماكن قذرة أو فيها ما يُنفر من الخشوع ويُبعد عن الطمأنينة.',
   },
   {
     id: 22,
@@ -187,7 +187,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تجلسوا على القُبُورِ ولا تُصلُّوا إليها فإنَّها تكلَّمُ أصحَابَها اليومَ بما يكرهونَ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'الجلوس على القبور والصلاة إليها مكروه، فإنّها تكلّم أصحابها بما يكرهون من ت胠ّضهم.',
+    explanation: 'الجلوس على القبور والصلاة إليها مكروه، فإنّها تكلّم أصحابها بما يكرهون من تعذّيبهم.',
   },
   {
     id: 23,
@@ -195,7 +195,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تزالُ أمَّتي بخيرٍ ما لم يُؤذِّوا ذِمَّهم',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'الأمة Muslimة تبقى على الخير ما دامت تحافظ على حقوق غير المسلمين من أهل الذمّة.',
+    explanation: 'الأمة المسلمة تبقى على الخير ما دامت تحافظ على حقوق غير المسلمين من أهل الذمّة.',
   },
   {
     id: 24,
@@ -203,7 +203,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا تُصِلُّوا لوقتٍ ولا تتقدَّموا عنهُ، وبيْنَ ذلكَ صلاةٌ في غيرِ وقتٍ لا تُفعلُها',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'يُنهى عن الإسراف في الصلاة (كالإكثار من الرواتب)”modified” or عن التقدّم على الوقت المحدّد.',
+    explanation: 'لا تُصلّوا قبل دخول الوقت ولا بعده مباشرة، وبيّن أنّ هناك أوقاتاً يُكره فيها الصلاة.',
   },
   {
     id: 25,
@@ -219,7 +219,7 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'إنَّ العبدَ إذا وقفَ بينَ يديِ ربِّهِ تباركَ وتعالى يومَ القيامةِ فلَم يُحاسَبْ فيما صنعَ فقد هلكَ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'الحساب يوم القيامة دليل على رحمة الله، فمن لم يُحاسب على ذنوبه فقد هلك خوفًا من أنّه لم يكن م计数ًا.',
+    explanation: 'الحساب يوم القيامة رحمة من الله للعبد، فمن لم يُحاسب على ذنوبه فقد هلك لأنّه لم يكن محسوباً في الدنيا.',
   },
   {
     id: 27,
@@ -331,6 +331,6 @@ export const AL_ARBAIN_AL_NAWAWIYYAH: Hadith[] = [
     textArabic: 'لا يُكرهُ أحدُكم أن يقبلَ ثلاثاً في اليومِ',
     source: 'NOT VERIFIED — text needs specialist review',
     verified: false,
-    explanation: 'الlocksع على القبور أو يُصلي إليها مكروه، لأنّها تكلّم أصحابها بما يكرهون.',
+    explanation: 'لا تحابسوا على القبور ولا تصلّوا إليها، فإنّها تكلّم أصحابها اليوم بما يكرهون.',
   },
 ];
