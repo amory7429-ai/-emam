@@ -19,18 +19,38 @@ interface Passage {
   juz: number;
 }
 
-const JUZ_START: Record<number, number> = {
-  1:1, 2:2, 3:2, 4:3, 5:4, 6:4, 7:5, 8:6, 9:7, 10:8,
-  11:9, 12:10, 13:12, 14:15, 15:17, 16:18, 17:21, 18:23,
-  19:25, 20:27, 21:29, 22:30, 23:33, 24:35, 25:39, 26:41,
-  27:46, 28:51, 29:58, 30:67,
-};
-
-const JUZ_END: Record<number, number> = {
-  1:2, 2:2, 3:2, 4:3, 5:4, 6:5, 7:6, 8:7, 9:8, 10:9,
-  11:11, 12:12, 13:14, 14:16, 15:17, 16:20, 17:22, 18:24,
-  19:26, 20:28, 21:29, 22:32, 23:34, 24:38, 25:40, 26:45,
-  27:50, 28:57, 29:66, 30:114,
+// Each juz: [startSurahId, startAyah, endSurahId, endAyah]
+const JUZ_RANGES: Record<number, [number, number, number, number]> = {
+  1:  [1, 1, 2, 141],
+  2:  [2, 142, 2, 252],
+  3:  [2, 253, 3, 92],
+  4:  [3, 93, 4, 23],
+  5:  [4, 24, 4, 147],
+  6:  [4, 148, 5, 81],
+  7:  [5, 82, 6, 110],
+  8:  [6, 111, 7, 87],
+  9:  [7, 88, 8, 75],
+  10: [8, 1, 9, 92],
+  11: [9, 93, 11, 5],
+  12: [11, 6, 12, 52],
+  13: [12, 53, 14, 52],
+  14: [15, 1, 16, 128],
+  15: [17, 1, 18, 74],
+  16: [18, 75, 20, 135],
+  17: [21, 1, 22, 78],
+  18: [23, 1, 25, 20],
+  19: [25, 21, 27, 55],
+  20: [27, 56, 29, 45],
+  21: [29, 46, 33, 30],
+  22: [33, 31, 36, 27],
+  23: [36, 28, 39, 31],
+  24: [39, 32, 41, 46],
+  25: [41, 47, 45, 37],
+  26: [46, 1, 51, 60],
+  27: [52, 1, 57, 29],
+  28: [58, 1, 66, 12],
+  29: [67, 1, 77, 50],
+  30: [78, 1, 114, 6],
 };
 
 const LEVELS = [
@@ -76,15 +96,15 @@ function QuickPageInner() {
 
   const juzData = Array.from({ length: 30 }, (_, i) => {
     const n = i + 1;
-    const sMeta = SURAH_META.find(s => s.id === JUZ_START[n]);
-    const eMeta = SURAH_META.find(s => s.id === JUZ_END[n]);
+    const range = JUZ_RANGES[n];
+    const sMeta = SURAH_META.find(s => s.id === range[0]);
+    const eMeta = SURAH_META.find(s => s.id === range[2]);
     return { number: n, startName: sMeta?.nameArabic || '', endName: eMeta?.nameArabic || '' };
   });
 
   const generatePassages = (juz: number) => {
     const mk = monthKey();
-    const startSurah = JUZ_START[juz];
-    const endSurah = JUZ_END[juz];
+    const [startSurah, startAyah, endSurah, endAyah] = JUZ_RANGES[juz];
     const candidates: Passage[] = [];
 
     const passageLengthMap = { short: 5, medium: 8, long: 12 };
@@ -95,9 +115,11 @@ function QuickPageInner() {
       if (!meta) continue;
 
       const maxAyah = meta.ayahs;
+      const ayahFrom = s === startSurah ? startAyah : 1;
+      const ayahTo = s === endSurah ? endAyah : maxAyah;
 
-      for (let start = 1; start <= maxAyah - passageLength + 1; start += passageLength) {
-        const end = Math.min(start + passageLength - 1, maxAyah);
+      for (let start = ayahFrom; start <= ayahTo; start += passageLength) {
+        const end = Math.min(start + passageLength - 1, ayahTo);
         const passageId = `${s}:${start}-${end}`;
         if (!isUsedThisMonth(mk, passageId)) {
           candidates.push({
